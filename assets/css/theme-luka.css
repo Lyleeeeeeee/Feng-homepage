@@ -244,8 +244,21 @@ body.theme-luka .visitor-card-body {
   line-height: 1.6;
 }
 
-body.theme-luka #clustrmaps-container {
-  min-height: 180px;
+body.theme-luka .clustrmaps-root .clustrmaps-widget {
+  min-height: 160px;
+}
+
+/* Static ClustrMaps embeds: show one widget per theme (scripts must be in HTML, not injected). */
+body.theme-luka #clustrmaps-dark {
+  display: none;
+}
+
+html[data-theme="dark"] body.theme-luka #clustrmaps-light {
+  display: none !important;
+}
+
+html[data-theme="dark"] body.theme-luka #clustrmaps-dark {
+  display: block !important;
 }
 
 body.theme-luka .content {
@@ -359,6 +372,10 @@ body.theme-luka .exp-period {
 body.theme-luka .project-card {
   font-size: 15px;
   line-height: 1.7;
+}
+
+body.theme-luka .timeline-item.project-card::after {
+  top: 12px;
 }
 
 body.theme-luka .publications ol.bibliography {
