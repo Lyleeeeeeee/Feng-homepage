@@ -223,7 +223,7 @@
           <div class="awards-grid">
             <div class="award-item">
               <span class="award-icon">🏅</span>
-              <div class="award-text"><strong>Undergraduate thesis — <a href="https://cdr.lib.unc.edu/concern/honors_theses/3r075827h" target="_blank" rel="noopener">Highest Honors</a></strong>, UNC Chapel Hill</div>
+              <div class="award-text"><strong>Highest Honors — <a href="https://cdr.lib.unc.edu/concern/honors_theses/3r075827h" target="_blank" rel="noopener">Undergraduate Thesis</a></strong>, UNC Chapel Hill</div>
             </div>
             <div class="award-item">
               <span class="award-icon">📜</span>
@@ -328,6 +328,30 @@
         var bubbleTimer;
         var bubbleHideTimer;
         if (avatarBtn && bubbleEl) {
+          function placeAvatarBubble() {
+            var r = avatarBtn.getBoundingClientRect();
+            var gap = 12;
+            var useBelow = window.matchMedia('(max-width: 640px)').matches;
+            if (useBelow) {
+              bubbleEl.classList.add('avatar-bubble--below');
+              bubbleEl.style.left = Math.round(r.left + r.width / 2) + 'px';
+              bubbleEl.style.top = Math.round(r.bottom + gap) + 'px';
+            } else {
+              bubbleEl.classList.remove('avatar-bubble--below');
+              bubbleEl.style.left = Math.round(r.right + gap) + 'px';
+              bubbleEl.style.top = Math.round(r.top + r.height / 2) + 'px';
+            }
+          }
+
+          function syncBubbleToViewport() {
+            if (!bubbleEl.hidden) {
+              placeAvatarBubble();
+            }
+          }
+
+          window.addEventListener('resize', syncBubbleToViewport);
+          window.addEventListener('scroll', syncBubbleToViewport, true);
+
           avatarBtn.addEventListener('click', function() {
             avatarBtn.classList.remove('is-wiggling');
             void avatarBtn.offsetWidth;
@@ -339,6 +363,7 @@
             clearTimeout(bubbleTimer);
             clearTimeout(bubbleHideTimer);
             bubbleEl.textContent = AVATAR_BUBBLES[Math.floor(Math.random() * AVATAR_BUBBLES.length)];
+            placeAvatarBubble();
             bubbleEl.hidden = false;
             bubbleEl.classList.remove('is-open');
             void bubbleEl.offsetWidth;

@@ -150,6 +150,7 @@ body.theme-luka .sidebar {
   left: calc(50% - 560px);
   height: calc(100vh - 60px);
   overflow-y: auto;
+  overflow-x: hidden;
   text-align: center;
   box-sizing: border-box;
   display: flex;
@@ -202,21 +203,27 @@ body.theme-luka button.avatar-interactive {
   padding: 0;
   display: block;
   margin: 0 auto;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 6px 24px var(--luka-shadow);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 body.theme-luka button.avatar-interactive img {
-  width: 220px;
-  height: 220px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 6px 24px var(--luka-shadow);
   display: block;
 }
 
-body.theme-luka button.avatar-interactive:hover img {
+body.theme-luka button.avatar-interactive:hover {
   box-shadow: 0 8px 28px var(--luka-shadow);
+}
+
+body.theme-luka button.avatar-interactive:hover img {
   transform: scale(1.02);
 }
 
@@ -256,9 +263,11 @@ body.theme-luka button.avatar-interactive.is-wiggling img {
   }
 }
 
+/* Fixed so the sidebar scroll height doesn’t jump; JS sets left/top from avatar rect. */
 body.theme-luka .avatar-bubble {
-  margin: 14px auto 0;
-  max-width: 260px;
+  position: fixed;
+  z-index: 250;
+  max-width: min(260px, calc(100vw - 24px));
   padding: 10px 14px;
   border-radius: 14px;
   background: var(--luka-social-bg);
@@ -268,37 +277,75 @@ body.theme-luka .avatar-bubble {
   line-height: 1.45;
   text-align: left;
   box-shadow: 0 6px 20px var(--luka-shadow);
-  position: relative;
+  margin: 0;
   opacity: 0;
-  transform: translateY(6px) scale(0.98);
+  transform: translateY(-50%) translateX(12px) scale(0.98);
   transition: opacity 0.22s ease, transform 0.22s ease;
   pointer-events: none;
 }
 
 body.theme-luka .avatar-bubble.is-open {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(-50%) translateX(0) scale(1);
 }
 
-body.theme-luka .avatar-bubble::before {
+/* Tail points left toward the avatar (bubble sits to the right of the photo). */
+body.theme-luka .avatar-bubble:not(.avatar-bubble--below)::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  margin-top: -9px;
+  border-width: 9px 9px 9px 0;
+  border-style: solid;
+  border-color: transparent var(--luka-border) transparent transparent;
+}
+
+body.theme-luka .avatar-bubble:not(.avatar-bubble--below)::after {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  margin-top: -8px;
+  margin-right: -1px;
+  border-width: 8px 8px 8px 0;
+  border-style: solid;
+  border-color: transparent var(--luka-social-bg) transparent transparent;
+}
+
+/* Narrow screens: anchor below avatar; tail points up. */
+body.theme-luka .avatar-bubble.avatar-bubble--below {
+  transform: translateX(-50%) translateY(10px) scale(0.98);
+}
+
+body.theme-luka .avatar-bubble.avatar-bubble--below.is-open {
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+body.theme-luka .avatar-bubble.avatar-bubble--below::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -9px;
+  margin-bottom: 0;
+  right: auto;
+  top: auto;
+  border-width: 0 9px 9px 9px;
+  border-style: solid;
+  border-color: transparent transparent var(--luka-border) transparent;
+}
+
+body.theme-luka .avatar-bubble.avatar-bubble--below::after {
   content: "";
   position: absolute;
   bottom: 100%;
   left: 50%;
   margin-left: -8px;
-  border-width: 0 8px 8px 8px;
-  border-style: solid;
-  border-color: transparent transparent var(--luka-border) transparent;
-}
-
-body.theme-luka .avatar-bubble::after {
-  content: "";
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -7px;
   margin-bottom: -1px;
-  border-width: 0 7px 7px 7px;
+  right: auto;
+  top: auto;
+  border-width: 0 8px 8px 8px;
   border-style: solid;
   border-color: transparent transparent var(--luka-social-bg) transparent;
 }
@@ -638,9 +685,14 @@ body.theme-luka strong {
 }
 
 @media (max-width: 640px) {
-  body.theme-luka button.avatar-interactive img {
+  body.theme-luka button.avatar-interactive {
     width: 148px;
     height: 148px;
+  }
+
+  body.theme-luka button.avatar-interactive img {
+    width: 100%;
+    height: 100%;
   }
 
   body.theme-luka .site-name {
