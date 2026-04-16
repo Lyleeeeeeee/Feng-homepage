@@ -41,7 +41,7 @@
         </a>
 
         <h1 class="site-name">Feng Lin</h1>
-        <p class="site-email">fenglin@andrew.cmu.edu<br>Pittsburgh, PA · (919) 338-9663</p>
+        <p class="site-email">fenglin@andrew.cmu.edu<br>Pittsburgh, PA</p>
 
         <div class="social-icons">
           <a href="mailto:fenglin@andrew.cmu.edu" title="Email"><i class="fa-solid fa-envelope"></i></a>
@@ -88,6 +88,7 @@
           <div class="card timeline-item">
             <div class="timeline-row">
               <div class="timeline-date">Expected<br>Dec 2026</div>
+              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
               <div class="timeline-main">
                 <div class="experience-item">
                   <img src="assets/img/CMU.png" class="institution-logo" alt="Carnegie Mellon University">
@@ -105,6 +106,7 @@
           <div class="card timeline-item">
             <div class="timeline-row">
               <div class="timeline-date">Aug 2021 –<br>May 2025</div>
+              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
               <div class="timeline-main">
                 <div class="experience-item">
                   <img src="assets/img/UNC.svg.webp" class="institution-logo" alt="UNC Chapel Hill">
@@ -128,6 +130,7 @@
           <div class="card timeline-item">
             <div class="timeline-row">
               <div class="timeline-date">May – Aug<br>2024</div>
+              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
               <div class="timeline-main">
                 <div class="experience-item">
                   <img src="assets/img/institution.svg" alt="" class="institution-logo" width="52" height="52">
@@ -144,10 +147,12 @@
 
       <div class="section" id="projects">
         <h2 class="section-title">Projects</h2>
+        <!-- If two entries share the exact same date range, use class "timeline-date timeline-date--same" on the 2nd date cell and put <span class="timeline-ditto" title="…" aria-hidden="true">〃</span> inside; keep full dates in title for accessibility. -->
         <div class="section-body">
           <div class="card timeline-item project-card">
             <div class="timeline-row">
               <div class="timeline-date">Jan 2026 –<br>Present</div>
+              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
               <div class="timeline-main">
                 <p><strong>LLM-Augmented Retrieval for Product Recommendation</strong> (Amazon Reviews 2023)</p>
                 <p>Retrieval pipeline with HyDE-style hypothetical document embeddings; multimodal item embeddings (CLIP) + FAISS; synthetic LLM queries from interaction history and reviews; evaluated with Recall@K and NDCG@K.</p>
@@ -157,6 +162,7 @@
           <div class="card timeline-item project-card">
             <div class="timeline-row">
               <div class="timeline-date">Aug – Dec<br>2025</div>
+              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
               <div class="timeline-main">
                 <p><strong>Single-Hop Question Answering with Classical and Transformer-based Retrieval</strong></p>
                 <p>End-to-end QA benchmarking TF-IDF, BM25, sentence encoders, and BERT-family models; fine-tuned transformers on SQuAD 2.0 with wandb tracking; ablations showing up to ~2.7× gains in sentence retrieval accuracy with stable end-to-end latency.</p>
@@ -166,6 +172,7 @@
           <div class="card timeline-item project-card">
             <div class="timeline-row">
               <div class="timeline-date">June – Aug<br>2025</div>
+              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
               <div class="timeline-main">
                 <p><strong>LLM-Based Hierarchical Video Understanding for Anomaly Detection</strong></p>
                 <p>VideoTree + GPT-4 reasoning on UCF-Crime; improved AUC 0.742 → 0.853 with 38% fewer captions and 17% lower latency.</p>
@@ -175,6 +182,7 @@
           <div class="card timeline-item project-card">
             <div class="timeline-row">
               <div class="timeline-date">Aug – Dec<br>2024</div>
+              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
               <div class="timeline-main">
                 <p><strong>Saliency Maps for Semantic Segmentation in Dashcam Images</strong></p>
                 <p>Combined saliency from CNN, GAN, and Transformer models in a U-Net pipeline; +13.1% car-class pixel accuracy and −25% pedestrian detection variance.</p>
@@ -184,6 +192,7 @@
           <div class="card timeline-item project-card">
             <div class="timeline-row">
               <div class="timeline-date">Mar 2024</div>
+              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
               <div class="timeline-main">
                 <p><strong>American Bar Association Legal Service Supply Shortage</strong></p>
                 <p>Two-stage risk ranking with LSTM, SVM, and KNN (82% recall on underserved regions); causality-informed feature improving downstream prioritization by 27%.</p>

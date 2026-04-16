@@ -222,7 +222,8 @@ body.theme-luka .social-icons a:hover {
 
 body.theme-luka .visitor-card {
   margin: 40px auto 0;
-  width: 240px;
+  width: 100%;
+  max-width: 280px;
   padding: 18px 16px;
   border: 1px dashed var(--luka-border);
   border-radius: 14px;
@@ -246,7 +247,7 @@ body.theme-luka .visitor-card-body {
 
 /* ClustrMaps: single official embed; keep space so layout does not collapse before iframe loads */
 body.theme-luka .clustrmaps-root {
-  min-height: 190px;
+  min-height: 155px;
   max-width: 100%;
 }
 
@@ -299,10 +300,11 @@ body.theme-luka .timeline-item {
   padding-bottom: 22px;
 }
 
+/* Timeline: [ date (left) | axis + node (center) | content (right) ] */
 body.theme-luka .timeline-row {
   display: grid;
-  grid-template-columns: minmax(5.75rem, 7.25rem) 1fr;
-  column-gap: 0.75rem;
+  grid-template-columns: minmax(5.25rem, 9.75rem) 30px minmax(0, 1fr);
+  column-gap: 12px;
   align-items: start;
 }
 
@@ -312,28 +314,60 @@ body.theme-luka .timeline-date {
   color: var(--luka-accent);
   line-height: 1.45;
   text-align: right;
-  padding-right: 12px;
   padding-top: 2px;
+  padding-right: 4px;
 }
 
-body.theme-luka .timeline-main {
+/* Second row with identical period as above: add class timeline-date--same and optional title="…" */
+body.theme-luka .timeline-date--same {
+  color: var(--luka-secondary);
+  font-weight: 500;
+}
+
+body.theme-luka .timeline-date--same .timeline-ditto {
+  font-size: 16px;
+  letter-spacing: 0.12em;
+}
+
+body.theme-luka .timeline-track {
   position: relative;
-  border-left: 2px solid var(--luka-border);
-  padding-left: 16px;
-  min-height: 0.5rem;
+  justify-self: center;
+  width: 30px;
+  min-height: 2.75rem;
 }
 
-body.theme-luka .timeline-main::before {
+body.theme-luka .timeline-track::before {
   content: "";
   position: absolute;
-  left: -6px;
-  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  top: 0;
+  bottom: -22px;
+  background: linear-gradient(to bottom, var(--luka-accent), var(--luka-border));
+}
+
+body.theme-luka .timeline-item:last-child .timeline-track::before {
+  bottom: 40%;
+}
+
+body.theme-luka .timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  transform: translateX(-50%);
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background: var(--luka-accent);
   border: 2px solid var(--luka-bg);
   box-sizing: border-box;
+  z-index: 1;
+}
+
+body.theme-luka .timeline-main {
+  position: relative;
+  min-height: 0.5rem;
 }
 
 body.theme-luka .experience-item {
@@ -536,24 +570,30 @@ body.theme-luka strong {
   }
 
   body.theme-luka .timeline-row {
-    grid-template-columns: 1fr;
-    row-gap: 10px;
+    grid-template-columns: 22px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 10px;
+    row-gap: 8px;
   }
 
   body.theme-luka .timeline-date {
+    grid-column: 2;
+    grid-row: 1;
     text-align: left;
     padding-right: 0;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--luka-footer-border);
+  }
+
+  body.theme-luka .timeline-track {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    justify-self: center;
+    width: 22px;
+    min-height: 3rem;
   }
 
   body.theme-luka .timeline-main {
-    border-left: none;
-    padding-left: 0;
-  }
-
-  body.theme-luka .timeline-main::before {
-    display: none;
+    grid-column: 2;
+    grid-row: 2;
   }
 }
 
