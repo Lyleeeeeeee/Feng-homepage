@@ -174,20 +174,11 @@ body.theme-luka .site-name {
 }
 
 body.theme-luka .site-email {
-  margin: 0 0 10px;
+  margin: 0 0 22px;
   color: var(--luka-secondary);
   font-size: 13px;
   font-family: "Ubuntu Mono", "SFMono-Regular", monospace;
   word-break: break-all;
-}
-
-body.theme-luka .site-tagline {
-  margin: 0 0 22px;
-  font-size: 13px;
-  font-style: italic;
-  color: var(--luka-accent);
-  line-height: 1.45;
-  min-height: 1.4em;
 }
 
 body.theme-luka .avatar-wrap {
