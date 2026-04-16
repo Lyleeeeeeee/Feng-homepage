@@ -296,35 +296,44 @@ body.theme-luka .card {
 
 body.theme-luka .timeline-item {
   position: relative;
-  margin-left: 20px;
-  padding-left: 8px;
-  padding-bottom: 20px;
+  padding-bottom: 22px;
 }
 
-body.theme-luka .timeline-item::before {
+body.theme-luka .timeline-row {
+  display: grid;
+  grid-template-columns: minmax(5.75rem, 7.25rem) 1fr;
+  column-gap: 0.75rem;
+  align-items: start;
+}
+
+body.theme-luka .timeline-date {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--luka-accent);
+  line-height: 1.45;
+  text-align: right;
+  padding-right: 12px;
+  padding-top: 2px;
+}
+
+body.theme-luka .timeline-main {
+  position: relative;
+  border-left: 2px solid var(--luka-border);
+  padding-left: 16px;
+  min-height: 0.5rem;
+}
+
+body.theme-luka .timeline-main::before {
   content: "";
   position: absolute;
-  left: -20px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, var(--luka-accent), rgba(194, 113, 79, 0.12));
-}
-
-body.theme-luka .timeline-item:last-child::before {
-  bottom: 50%;
-}
-
-body.theme-luka .timeline-item::after {
-  content: "";
-  position: absolute;
-  left: -25px;
-  top: 22px;
+  left: -6px;
+  top: 6px;
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background: var(--luka-accent);
   border: 2px solid var(--luka-bg);
+  box-sizing: border-box;
 }
 
 body.theme-luka .experience-item {
@@ -368,8 +377,12 @@ body.theme-luka .project-card {
   line-height: 1.7;
 }
 
-body.theme-luka .timeline-item.project-card::after {
-  top: 12px;
+body.theme-luka .project-card .timeline-main p {
+  margin: 0 0 10px;
+}
+
+body.theme-luka .project-card .timeline-main p:last-child {
+  margin-bottom: 0;
 }
 
 body.theme-luka .publications ol.bibliography {
@@ -520,6 +533,27 @@ body.theme-luka strong {
   body.theme-luka .visitor-card {
     width: 100%;
     max-width: 280px;
+  }
+
+  body.theme-luka .timeline-row {
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+  }
+
+  body.theme-luka .timeline-date {
+    text-align: left;
+    padding-right: 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--luka-footer-border);
+  }
+
+  body.theme-luka .timeline-main {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  body.theme-luka .timeline-main::before {
+    display: none;
   }
 }
 
