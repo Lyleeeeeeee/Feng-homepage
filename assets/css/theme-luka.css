@@ -244,45 +244,15 @@ body.theme-luka .visitor-card-body {
   line-height: 1.6;
 }
 
-/* ClustrMaps: two embeds share the same site id (d=). Do not use display:none — the hidden
-   iframe often fails to initialize. Stack panels and toggle visibility with opacity instead. */
+/* ClustrMaps: single official embed; keep space so layout does not collapse before iframe loads */
 body.theme-luka .clustrmaps-root {
-  position: relative;
-  min-height: 200px;
+  min-height: 190px;
+  max-width: 100%;
 }
 
-body.theme-luka #clustrmaps-light {
-  position: relative;
-  z-index: 2;
-}
-
-body.theme-luka #clustrmaps-dark {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  min-height: 200px;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-html[data-theme="dark"] body.theme-luka #clustrmaps-light {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  min-height: 200px;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  z-index: 1 !important;
-}
-
-html[data-theme="dark"] body.theme-luka #clustrmaps-dark {
-  position: relative !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  z-index: 2 !important;
+body.theme-luka .clustrmaps-root iframe {
+  max-width: 100% !important;
+  border: 0;
 }
 
 body.theme-luka .content {

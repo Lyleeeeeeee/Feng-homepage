@@ -54,12 +54,8 @@
         <div class="visitor-card">
           <div class="visitor-card-title">Visitor Map</div>
           <div class="visitor-card-body clustrmaps-root">
-            <div id="clustrmaps-light" class="clustrmaps-widget" aria-hidden="false">
-              <script type="text/javascript" src="https://cdn.clustrmaps.com/map_v2.js?cl=3B82F6&amp;w=314&amp;t=n&amp;d=HVWYF2PFgGFRHKYzV_s0j4i6jvtqi_41aWYsytB0HE8&amp;co=ffffff&amp;cmo=3B82F6&amp;cmn=93C5FD&amp;ct=6B7280"></script>
-            </div>
-            <div id="clustrmaps-dark" class="clustrmaps-widget" aria-hidden="true">
-              <script type="text/javascript" src="https://cdn.clustrmaps.com/map_v2.js?cl=c2714f&amp;w=224&amp;t=n&amp;d=HVWYF2PFgGFRHKYzV_s0j4i6jvtqi_41aWYsytB0HE8&amp;co=000000&amp;cmo=3acc3a&amp;cmn=ff5353&amp;ct=5e2121"></script>
-            </div>
+            <!-- Official snippet from ClustrMaps (Javascript based). Must stay in &lt;body&gt;, not in &lt;head&gt;. -->
+            <script type="text/javascript" id="clustrmaps" src="https://cdn.clustrmaps.com/map_v2.js?cl=ffffff&amp;w=a&amp;t=n&amp;d=HVWYF2PFgGFRHKYzV_s0j4i6jvtqi_41aWYsytB0HE8"></script>
           </div>
         </div>
       </div>
@@ -72,8 +68,8 @@
           <!-- <p>Hello! I am <strong>Your Name</strong>, a student / researcher / engineer working on topics that matter to you. This template is designed to make personal academic websites clean, readable, and easy to adapt.</p>
           <p>You can use this section to briefly introduce your background, research interests, and current affiliations. Keep it concise and personal.</p> -->
           <p>
-            Hello! I am <strong>Feng Lin</strong>, an M.S. student in Machine Learning at the School of Computer Science, Carnegie Mellon University (expected December 2026).
-            Previously, I received my B.S. from the University of North Carolina at Chapel Hill, double-majoring in <strong>Statistics and Analytics</strong> and <strong>Economics</strong> with a minor in <strong>Cognitive Science</strong>.
+            Hello! I am <strong>Feng Lin</strong>, an M.S. student in <strong>Machine Learning</strong> at the School of Computer Science, Carnegie Mellon University (expected December 2026).
+            Previously, I received my B.S. from the University of North Carolina at Chapel Hill, double-majoring in <strong>Statistics and Analytics</strong> and <strong>Economics</strong> with a minor in Cognitive Science.
           </p>
           <p>
             My research interests lie in machine learning and causal inference, 
@@ -230,12 +226,6 @@
         icon.classList.toggle('fa-sun', isDark);
         icon.classList.toggle('fa-moon', !isDark);
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        var lightEl = document.getElementById('clustrmaps-light');
-        var darkEl = document.getElementById('clustrmaps-dark');
-        if (lightEl && darkEl) {
-          lightEl.setAttribute('aria-hidden', isDark ? 'true' : 'false');
-          darkEl.setAttribute('aria-hidden', isDark ? 'false' : 'true');
-        }
       }
 
       const savedTheme = localStorage.getItem('theme');
