@@ -150,7 +150,6 @@ body.theme-luka .sidebar {
   left: calc(50% - 560px);
   height: calc(100vh - 60px);
   overflow-y: auto;
-  overflow-x: hidden;
   text-align: center;
   box-sizing: border-box;
   display: flex;
@@ -258,96 +257,32 @@ body.theme-luka button.avatar-interactive.is-wiggling img {
     animation: none;
   }
 
-  body.theme-luka .avatar-bubble {
+  body.theme-luka .avatar-message {
     transition: none;
   }
 }
 
-/* Fixed so the sidebar scroll height doesn’t jump; JS sets left/top from avatar rect. */
-body.theme-luka .avatar-bubble {
-  position: fixed;
-  z-index: 250;
-  max-width: min(260px, calc(100vw - 24px));
+body.theme-luka .avatar-message {
+  margin: 12px auto 0;
+  max-width: 280px;
   padding: 10px 14px;
-  border-radius: 14px;
+  border-radius: 10px;
   background: var(--luka-social-bg);
   border: 1px solid var(--luka-border);
   color: var(--luka-text);
   font-size: 13px;
   line-height: 1.45;
-  text-align: left;
-  box-shadow: 0 6px 20px var(--luka-shadow);
-  margin: 0;
+  text-align: center;
+  box-shadow: 0 4px 14px var(--luka-shadow);
   opacity: 0;
-  transform: translateY(-50%) translateX(12px) scale(0.98);
+  transform: translateY(6px);
   transition: opacity 0.22s ease, transform 0.22s ease;
   pointer-events: none;
 }
 
-body.theme-luka .avatar-bubble.is-open {
+body.theme-luka .avatar-message.is-visible {
   opacity: 1;
-  transform: translateY(-50%) translateX(0) scale(1);
-}
-
-/* Tail points left toward the avatar (bubble sits to the right of the photo). */
-body.theme-luka .avatar-bubble:not(.avatar-bubble--below)::before {
-  content: "";
-  position: absolute;
-  right: 100%;
-  top: 50%;
-  margin-top: -9px;
-  border-width: 9px 9px 9px 0;
-  border-style: solid;
-  border-color: transparent var(--luka-border) transparent transparent;
-}
-
-body.theme-luka .avatar-bubble:not(.avatar-bubble--below)::after {
-  content: "";
-  position: absolute;
-  right: 100%;
-  top: 50%;
-  margin-top: -8px;
-  margin-right: -1px;
-  border-width: 8px 8px 8px 0;
-  border-style: solid;
-  border-color: transparent var(--luka-social-bg) transparent transparent;
-}
-
-/* Narrow screens: anchor below avatar; tail points up. */
-body.theme-luka .avatar-bubble.avatar-bubble--below {
-  transform: translateX(-50%) translateY(10px) scale(0.98);
-}
-
-body.theme-luka .avatar-bubble.avatar-bubble--below.is-open {
-  transform: translateX(-50%) translateY(0) scale(1);
-}
-
-body.theme-luka .avatar-bubble.avatar-bubble--below::before {
-  content: "";
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -9px;
-  margin-bottom: 0;
-  right: auto;
-  top: auto;
-  border-width: 0 9px 9px 9px;
-  border-style: solid;
-  border-color: transparent transparent var(--luka-border) transparent;
-}
-
-body.theme-luka .avatar-bubble.avatar-bubble--below::after {
-  content: "";
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -8px;
-  margin-bottom: -1px;
-  right: auto;
-  top: auto;
-  border-width: 0 8px 8px 8px;
-  border-style: solid;
-  border-color: transparent transparent var(--luka-social-bg) transparent;
+  transform: translateY(0);
 }
 
 body.theme-luka .social-icons {

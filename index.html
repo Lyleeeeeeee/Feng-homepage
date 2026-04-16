@@ -40,7 +40,7 @@
           <button type="button" class="image avatar avatar-interactive" id="avatarHi" aria-label="Say hello">
             <img src="assets/img/Feng.JPEG" alt="Feng Lin">
           </button>
-          <div class="avatar-bubble" id="avatarBubble" role="status" aria-live="polite" hidden></div>
+          <div class="avatar-message" id="avatarMessage" role="status" aria-live="polite" hidden></div>
         </div>
 
         <h1 class="site-name">Feng Lin</h1>
@@ -123,7 +123,7 @@
         <div class="section-body">
           <div class="card timeline-item">
             <div class="experience-item">
-              <img src="assets/img/institution.svg" alt="" class="institution-logo" width="52" height="52">
+              <img src="assets/img/swhy.jpg" alt="" class="institution-logo" width="52" height="52">
               <div class="experience-content">
                 <p class="exp-title"><strong>Shenwan Hongyuan Group Co., Ltd</strong></p>
                 <p class="exp-period">May – Aug 2024</p>
@@ -324,34 +324,10 @@
           tagEl.textContent = TAGLINES[Math.floor(Math.random() * TAGLINES.length)];
         }
         var avatarBtn = document.getElementById('avatarHi');
-        var bubbleEl = document.getElementById('avatarBubble');
-        var bubbleTimer;
-        var bubbleHideTimer;
-        if (avatarBtn && bubbleEl) {
-          function placeAvatarBubble() {
-            var r = avatarBtn.getBoundingClientRect();
-            var gap = 12;
-            var useBelow = window.matchMedia('(max-width: 640px)').matches;
-            if (useBelow) {
-              bubbleEl.classList.add('avatar-bubble--below');
-              bubbleEl.style.left = Math.round(r.left + r.width / 2) + 'px';
-              bubbleEl.style.top = Math.round(r.bottom + gap) + 'px';
-            } else {
-              bubbleEl.classList.remove('avatar-bubble--below');
-              bubbleEl.style.left = Math.round(r.right + gap) + 'px';
-              bubbleEl.style.top = Math.round(r.top + r.height / 2) + 'px';
-            }
-          }
-
-          function syncBubbleToViewport() {
-            if (!bubbleEl.hidden) {
-              placeAvatarBubble();
-            }
-          }
-
-          window.addEventListener('resize', syncBubbleToViewport);
-          window.addEventListener('scroll', syncBubbleToViewport, true);
-
+        var msgEl = document.getElementById('avatarMessage');
+        var msgTimer;
+        var msgHideTimer;
+        if (avatarBtn && msgEl) {
           avatarBtn.addEventListener('click', function() {
             avatarBtn.classList.remove('is-wiggling');
             void avatarBtn.offsetWidth;
@@ -360,22 +336,21 @@
               avatarBtn.classList.remove('is-wiggling');
             }, 600);
 
-            clearTimeout(bubbleTimer);
-            clearTimeout(bubbleHideTimer);
-            bubbleEl.textContent = AVATAR_BUBBLES[Math.floor(Math.random() * AVATAR_BUBBLES.length)];
-            placeAvatarBubble();
-            bubbleEl.hidden = false;
-            bubbleEl.classList.remove('is-open');
-            void bubbleEl.offsetWidth;
+            clearTimeout(msgTimer);
+            clearTimeout(msgHideTimer);
+            msgEl.textContent = AVATAR_BUBBLES[Math.floor(Math.random() * AVATAR_BUBBLES.length)];
+            msgEl.hidden = false;
+            msgEl.classList.remove('is-visible');
+            void msgEl.offsetWidth;
             requestAnimationFrame(function() {
-              bubbleEl.classList.add('is-open');
+              msgEl.classList.add('is-visible');
             });
 
-            bubbleTimer = setTimeout(function() {
-              bubbleEl.classList.remove('is-open');
-              bubbleHideTimer = setTimeout(function() {
-                bubbleEl.hidden = true;
-              }, 230);
+            msgTimer = setTimeout(function() {
+              msgEl.classList.remove('is-visible');
+              msgHideTimer = setTimeout(function() {
+                msgEl.hidden = true;
+              }, 220);
             }, 3200);
           });
         }
