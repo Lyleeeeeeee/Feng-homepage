@@ -244,21 +244,45 @@ body.theme-luka .visitor-card-body {
   line-height: 1.6;
 }
 
-body.theme-luka .clustrmaps-root .clustrmaps-widget {
-  min-height: 160px;
+/* ClustrMaps: two embeds share the same site id (d=). Do not use display:none — the hidden
+   iframe often fails to initialize. Stack panels and toggle visibility with opacity instead. */
+body.theme-luka .clustrmaps-root {
+  position: relative;
+  min-height: 200px;
 }
 
-/* Static ClustrMaps embeds: show one widget per theme (scripts must be in HTML, not injected). */
+body.theme-luka #clustrmaps-light {
+  position: relative;
+  z-index: 2;
+}
+
 body.theme-luka #clustrmaps-dark {
-  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-height: 200px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
 }
 
 html[data-theme="dark"] body.theme-luka #clustrmaps-light {
-  display: none !important;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-height: 200px;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
 }
 
 html[data-theme="dark"] body.theme-luka #clustrmaps-dark {
-  display: block !important;
+  position: relative !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  z-index: 2 !important;
 }
 
 body.theme-luka .content {
