@@ -36,12 +36,13 @@
   <div class="wrapper">
     <header class="sidebar">
       <div class="profile-card">
-        <a class="image avatar">
+        <button type="button" class="image avatar avatar-interactive" id="avatarHi" aria-label="Say hello">
           <img src="assets/img/Feng.JPEG" alt="Feng Lin">
-        </a>
+        </button>
 
         <h1 class="site-name">Feng Lin</h1>
         <p class="site-email">fenglin@andrew.cmu.edu<br>Pittsburgh, PA</p>
+        <p class="site-tagline" id="siteTagline" aria-live="polite"></p>
 
         <div class="social-icons">
           <a href="mailto:fenglin@andrew.cmu.edu" title="Email"><i class="fa-solid fa-envelope"></i></a>
@@ -77,6 +78,13 @@
             I have worked on topics including probability calibration in unbalanced classification, 
             multimodal recommendation systems, and treatment effect estimation under measurement error.
           </p>
+          <div class="playful-card">
+            <button type="button" class="thought-shuffle-btn" id="thoughtShuffle">
+              <i class="fa-solid fa-shuffle" aria-hidden="true"></i>
+              <span>Random research tangent</span>
+            </button>
+            <p class="thought-bubble" id="thoughtBubble" hidden></p>
+          </div>
         </div>
       </div>
 
@@ -86,37 +94,27 @@
 
           <!-- CMU -->
           <div class="card timeline-item">
-            <div class="timeline-row">
-              <div class="timeline-date">Expected<br>Dec 2026</div>
-              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
-              <div class="timeline-main">
-                <div class="experience-item">
-                  <img src="assets/img/CMU.png" class="institution-logo" alt="Carnegie Mellon University">
-                  <div class="experience-content">
-                    <p class="exp-title"><strong>Carnegie Mellon University</strong></p>
-                    <p class="exp-detail">M.S. in Machine Learning, School of Computer Science</p>
-                    <p class="exp-detail">GPA: 4.00 / 4.00</p>
-                  </div>
-                </div>
+            <div class="experience-item">
+              <img src="assets/img/CMU.png" class="institution-logo" alt="Carnegie Mellon University">
+              <div class="experience-content">
+                <p class="exp-title"><strong>Carnegie Mellon University</strong></p>
+                <p class="exp-period">Expected Dec 2026</p>
+                <p class="exp-detail">M.S. in Machine Learning, School of Computer Science</p>
+                <p class="exp-detail">GPA: 4.00 / 4.00</p>
               </div>
             </div>
           </div>
 
           <!-- UNC -->
           <div class="card timeline-item">
-            <div class="timeline-row">
-              <div class="timeline-date">Aug 2021 –<br>May 2025</div>
-              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
-              <div class="timeline-main">
-                <div class="experience-item">
-                  <img src="assets/img/UNC.svg.webp" class="institution-logo" alt="UNC Chapel Hill">
-                  <div class="experience-content">
-                    <p class="exp-title"><strong>University of North Carolina at Chapel Hill</strong></p>
-                    <p class="exp-detail">B.S. in Statistics and Analytics & Economics (double majors); Cognitive Science (minor)</p>
-                    <p class="exp-detail">GPA: 3.99 / 4.00</p>
-                    <p class="exp-detail">Undergraduate thesis — <a href="https://cdr.lib.unc.edu/concern/honors_theses/3r075827h" target="_blank" rel="noopener">Highest Honors</a></p>
-                  </div>
-                </div>
+            <div class="experience-item">
+              <img src="assets/img/UNC.svg.webp" class="institution-logo" alt="UNC Chapel Hill">
+              <div class="experience-content">
+                <p class="exp-title"><strong>University of North Carolina at Chapel Hill</strong></p>
+                <p class="exp-period">Aug 2021 – May 2025</p>
+                <p class="exp-detail">B.S. in Statistics and Analytics & Economics (double majors); Cognitive Science (minor)</p>
+                <p class="exp-detail">GPA: 3.99 / 4.00</p>
+                <p class="exp-detail">Undergraduate thesis — <a href="https://cdr.lib.unc.edu/concern/honors_theses/3r075827h" target="_blank" rel="noopener">Highest Honors</a></p>
               </div>
             </div>
           </div>
@@ -128,17 +126,12 @@
         <h2 class="section-title">Experience</h2>
         <div class="section-body">
           <div class="card timeline-item">
-            <div class="timeline-row">
-              <div class="timeline-date">May – Aug<br>2024</div>
-              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
-              <div class="timeline-main">
-                <div class="experience-item">
-                  <img src="assets/img/institution.svg" alt="" class="institution-logo" width="52" height="52">
-                  <div class="experience-content">
-                    <p class="exp-title"><strong>Shenwan Hongyuan Group Co., Ltd</strong></p>
-                    <p class="exp-detail">Data Science Intern · Beijing</p>
-                  </div>
-                </div>
+            <div class="experience-item">
+              <img src="assets/img/institution.svg" alt="" class="institution-logo" width="52" height="52">
+              <div class="experience-content">
+                <p class="exp-title"><strong>Shenwan Hongyuan Group Co., Ltd</strong></p>
+                <p class="exp-period">May – Aug 2024</p>
+                <p class="exp-detail">Data Science Intern · Beijing</p>
               </div>
             </div>
           </div>
@@ -147,57 +140,31 @@
 
       <div class="section" id="projects">
         <h2 class="section-title">Projects</h2>
-        <!-- If two entries share the exact same date range, use class "timeline-date timeline-date--same" on the 2nd date cell and put <span class="timeline-ditto" title="…" aria-hidden="true">〃</span> inside; keep full dates in title for accessibility. -->
         <div class="section-body">
           <div class="card timeline-item project-card">
-            <div class="timeline-row">
-              <div class="timeline-date">Jan 2026 –<br>Present</div>
-              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
-              <div class="timeline-main">
-                <p><strong>LLM-Augmented Retrieval for Product Recommendation</strong> (Amazon Reviews 2023)</p>
-                <p>Retrieval pipeline with HyDE-style hypothetical document embeddings; multimodal item embeddings (CLIP) + FAISS; synthetic LLM queries from interaction history and reviews; evaluated with Recall@K and NDCG@K.</p>
-              </div>
-            </div>
+            <p><strong>LLM-Augmented Retrieval for Product Recommendation</strong> (Amazon Reviews 2023)</p>
+            <p class="exp-period">Jan 2026 – Present</p>
+            <p>Retrieval pipeline with HyDE-style hypothetical document embeddings; multimodal item embeddings (CLIP) + FAISS; synthetic LLM queries from interaction history and reviews; evaluated with Recall@K and NDCG@K.</p>
           </div>
           <div class="card timeline-item project-card">
-            <div class="timeline-row">
-              <div class="timeline-date">Aug – Dec<br>2025</div>
-              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
-              <div class="timeline-main">
-                <p><strong>Single-Hop Question Answering with Classical and Transformer-based Retrieval</strong></p>
-                <p>End-to-end QA benchmarking TF-IDF, BM25, sentence encoders, and BERT-family models; fine-tuned transformers on SQuAD 2.0 with wandb tracking; ablations showing up to ~2.7× gains in sentence retrieval accuracy with stable end-to-end latency.</p>
-              </div>
-            </div>
+            <p><strong>Single-Hop Question Answering with Classical and Transformer-based Retrieval</strong></p>
+            <p class="exp-period">Aug – Dec 2025</p>
+            <p>End-to-end QA benchmarking TF-IDF, BM25, sentence encoders, and BERT-family models; fine-tuned transformers on SQuAD 2.0 with wandb tracking; ablations showing up to ~2.7× gains in sentence retrieval accuracy with stable end-to-end latency.</p>
           </div>
           <div class="card timeline-item project-card">
-            <div class="timeline-row">
-              <div class="timeline-date">June – Aug<br>2025</div>
-              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
-              <div class="timeline-main">
-                <p><strong>LLM-Based Hierarchical Video Understanding for Anomaly Detection</strong></p>
-                <p>VideoTree + GPT-4 reasoning on UCF-Crime; improved AUC 0.742 → 0.853 with 38% fewer captions and 17% lower latency.</p>
-              </div>
-            </div>
+            <p><strong>LLM-Based Hierarchical Video Understanding for Anomaly Detection</strong></p>
+            <p class="exp-period">June – Aug 2025</p>
+            <p>VideoTree + GPT-4 reasoning on UCF-Crime; improved AUC 0.742 → 0.853 with 38% fewer captions and 17% lower latency.</p>
           </div>
           <div class="card timeline-item project-card">
-            <div class="timeline-row">
-              <div class="timeline-date">Aug – Dec<br>2024</div>
-              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
-              <div class="timeline-main">
-                <p><strong>Saliency Maps for Semantic Segmentation in Dashcam Images</strong></p>
-                <p>Combined saliency from CNN, GAN, and Transformer models in a U-Net pipeline; +13.1% car-class pixel accuracy and −25% pedestrian detection variance.</p>
-              </div>
-            </div>
+            <p><strong>Saliency Maps for Semantic Segmentation in Dashcam Images</strong></p>
+            <p class="exp-period">Aug – Dec 2024</p>
+            <p>Combined saliency from CNN, GAN, and Transformer models in a U-Net pipeline; +13.1% car-class pixel accuracy and −25% pedestrian detection variance.</p>
           </div>
           <div class="card timeline-item project-card">
-            <div class="timeline-row">
-              <div class="timeline-date">Mar 2024</div>
-              <div class="timeline-track" aria-hidden="true"><span class="timeline-dot"></span></div>
-              <div class="timeline-main">
-                <p><strong>American Bar Association Legal Service Supply Shortage</strong></p>
-                <p>Two-stage risk ranking with LSTM, SVM, and KNN (82% recall on underserved regions); causality-informed feature improving downstream prioritization by 27%.</p>
-              </div>
-            </div>
+            <p><strong>American Bar Association Legal Service Supply Shortage</strong></p>
+            <p class="exp-period">Mar 2024</p>
+            <p>Two-stage risk ranking with LSTM, SVM, and KNN (82% recall on underserved regions); causality-informed feature improving downstream prioritization by 27%.</p>
           </div>
         </div>
       </div>
@@ -262,6 +229,8 @@
     </footer>
   </div>
 
+  <div id="siteToast" class="site-toast" role="status" aria-live="polite"></div>
+
   <script src="assets/js/scale.fix.js"></script>
   <script>
     (function() {
@@ -320,6 +289,55 @@
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         setTheme(!isDark);
       });
+
+      var TAGLINES = [
+        'Calibrating models — and curiosity.',
+        'UNC → CMU; still learning something new every week.',
+        'When in doubt, check the baselines.',
+        'Exploring imbalance: in data, metrics, and pour-over strength.'
+      ];
+      var TANGENTS = [
+        'If two reviewers disagree, the paper might be fine — the metrics might not be.',
+        'Class imbalance is as much an evaluation design problem as a modeling one.',
+        'Multimodal retrieval: align the embeddings, then align your sleep schedule.',
+        'Calibration after resampling? Your posteriors may need a second opinion.',
+        'A good ablation is worth more than a flashy new layer name.'
+      ];
+
+      (function initPlayful() {
+        var tagEl = document.getElementById('siteTagline');
+        if (tagEl && TAGLINES.length) {
+          tagEl.textContent = TAGLINES[Math.floor(Math.random() * TAGLINES.length)];
+        }
+        var shuffleBtn = document.getElementById('thoughtShuffle');
+        var bubble = document.getElementById('thoughtBubble');
+        if (shuffleBtn && bubble) {
+          shuffleBtn.addEventListener('click', function() {
+            bubble.textContent = TANGENTS[Math.floor(Math.random() * TANGENTS.length)];
+            bubble.hidden = false;
+          });
+        }
+        var avatarBtn = document.getElementById('avatarHi');
+        var toastEl = document.getElementById('siteToast');
+        if (avatarBtn && toastEl) {
+          avatarBtn.addEventListener('click', function() {
+            avatarBtn.classList.remove('is-wiggling');
+            void avatarBtn.offsetWidth;
+            avatarBtn.classList.add('is-wiggling');
+            setTimeout(function() {
+              avatarBtn.classList.remove('is-wiggling');
+            }, 600);
+            if (!sessionStorage.getItem('fl_avatar_hi')) {
+              toastEl.textContent = 'Thanks for stopping by!';
+              toastEl.classList.add('is-visible');
+              sessionStorage.setItem('fl_avatar_hi', '1');
+              setTimeout(function() {
+                toastEl.classList.remove('is-visible');
+              }, 2600);
+            }
+          });
+        }
+      })();
 
       if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver(function(entries) {
