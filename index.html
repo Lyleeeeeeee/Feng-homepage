@@ -36,9 +36,12 @@
   <div class="wrapper">
     <header class="sidebar">
       <div class="profile-card">
-        <button type="button" class="image avatar avatar-interactive" id="avatarHi" aria-label="Say hello">
-          <img src="assets/img/Feng.JPEG" alt="Feng Lin">
-        </button>
+        <div class="avatar-wrap">
+          <button type="button" class="image avatar avatar-interactive" id="avatarHi" aria-label="Say hello">
+            <img src="assets/img/Feng.JPEG" alt="Feng Lin">
+          </button>
+          <div class="avatar-bubble" id="avatarBubble" role="status" aria-live="polite" hidden></div>
+        </div>
 
         <h1 class="site-name">Feng Lin</h1>
         <p class="site-email">fenglin@andrew.cmu.edu<br>Pittsburgh, PA</p>
@@ -137,27 +140,45 @@
           <div class="card timeline-item project-card">
             <p><strong>LLM-Augmented Retrieval for Product Recommendation</strong> (Amazon Reviews 2023)</p>
             <p class="exp-period">Jan 2026 – Present</p>
-            <p>Retrieval pipeline with HyDE-style hypothetical document embeddings; multimodal item embeddings (CLIP) + FAISS; synthetic LLM queries from interaction history and reviews; evaluated with Recall@K and NDCG@K.</p>
+            <ul class="project-detail">
+              <li>Retrieval pipeline with HyDE-style hypothetical document embeddings.</li>
+              <li>Multimodal item embeddings (CLIP) + FAISS indexing.</li>
+              <li>Synthetic LLM queries from interaction history and reviews.</li>
+              <li>Evaluated with Recall@K and NDCG@K.</li>
+            </ul>
           </div>
           <div class="card timeline-item project-card">
             <p><strong>Single-Hop Question Answering with Classical and Transformer-based Retrieval</strong></p>
             <p class="exp-period">Aug – Dec 2025</p>
-            <p>End-to-end QA benchmarking TF-IDF, BM25, sentence encoders, and BERT-family models; fine-tuned transformers on SQuAD 2.0 with wandb tracking; ablations showing up to ~2.7× gains in sentence retrieval accuracy with stable end-to-end latency.</p>
+            <ul class="project-detail">
+              <li>End-to-end QA benchmarking TF-IDF, BM25, sentence encoders, and BERT-family models.</li>
+              <li>Fine-tuned transformers on SQuAD 2.0 with wandb tracking.</li>
+              <li>Ablations: up to ~2.7× gains in sentence retrieval accuracy with stable end-to-end latency.</li>
+            </ul>
           </div>
           <div class="card timeline-item project-card">
             <p><strong>LLM-Based Hierarchical Video Understanding for Anomaly Detection</strong></p>
             <p class="exp-period">June – Aug 2025</p>
-            <p>VideoTree + GPT-4 reasoning on UCF-Crime; improved AUC 0.742 → 0.853 with 38% fewer captions and 17% lower latency.</p>
+            <ul class="project-detail">
+              <li>VideoTree + GPT-4 reasoning on UCF-Crime.</li>
+              <li>Improved AUC 0.742 → 0.853 with 38% fewer captions and 17% lower latency.</li>
+            </ul>
           </div>
           <div class="card timeline-item project-card">
             <p><strong>Saliency Maps for Semantic Segmentation in Dashcam Images</strong></p>
             <p class="exp-period">Aug – Dec 2024</p>
-            <p>Combined saliency maps from CNN, GAN, and Transformer models in a U-Net pipeline; +13.1% car-class pixel accuracy and −25% pedestrian detection variance.</p>
+            <ul class="project-detail">
+              <li>Combined saliency maps from CNN, GAN, and Transformer models in a U-Net pipeline.</li>
+              <li>+13.1% car-class pixel accuracy; −25% pedestrian detection variance.</li>
+            </ul>
           </div>
           <div class="card timeline-item project-card">
             <p><strong>American Bar Association Legal Service Supply Shortage</strong></p>
             <p class="exp-period">Mar 2024</p>
-            <p>Two-stage risk ranking with LSTM, SVM, and KNN (82% recall on underserved regions); causality-informed feature engineering improving downstream prioritization by 27%.</p>
+            <ul class="project-detail">
+              <li>Two-stage risk ranking with LSTM, SVM, and KNN (82% recall on underserved regions).</li>
+              <li>Causality-informed feature engineering improving downstream prioritization by 27%.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -221,8 +242,6 @@
       </p>
     </footer>
   </div>
-
-  <div id="siteToast" class="site-toast" role="status" aria-live="polite"></div>
 
   <script src="assets/js/scale.fix.js"></script>
   <script>
@@ -288,6 +307,15 @@
         'UNC → CMU: new office, same git blame.',
         'Calibrating probabilities — and occasionally my sleep schedule.',
         '概率校准了，作息还在梯度震荡。',
+        '睡觉是另一个非”秃“问题。',
+        'Gradient descent on life; occasional NaN in sleep.'
+      ];
+
+      var AVATAR_BUBBLES = [
+        'Thanks for stopping by!',
+        'Hi — scroll down for the serious stuff.',
+        'Appreciate the click. The baselines appreciate it too.',
+        '谢谢来访。'
       ];
 
       (function initPlayful() {
@@ -296,8 +324,10 @@
           tagEl.textContent = TAGLINES[Math.floor(Math.random() * TAGLINES.length)];
         }
         var avatarBtn = document.getElementById('avatarHi');
-        var toastEl = document.getElementById('siteToast');
-        if (avatarBtn && toastEl) {
+        var bubbleEl = document.getElementById('avatarBubble');
+        var bubbleTimer;
+        var bubbleHideTimer;
+        if (avatarBtn && bubbleEl) {
           avatarBtn.addEventListener('click', function() {
             avatarBtn.classList.remove('is-wiggling');
             void avatarBtn.offsetWidth;
@@ -305,14 +335,23 @@
             setTimeout(function() {
               avatarBtn.classList.remove('is-wiggling');
             }, 600);
-            if (!sessionStorage.getItem('fl_avatar_hi')) {
-              toastEl.textContent = 'Thanks for stopping by!';
-              toastEl.classList.add('is-visible');
-              sessionStorage.setItem('fl_avatar_hi', '1');
-              setTimeout(function() {
-                toastEl.classList.remove('is-visible');
-              }, 2600);
-            }
+
+            clearTimeout(bubbleTimer);
+            clearTimeout(bubbleHideTimer);
+            bubbleEl.textContent = AVATAR_BUBBLES[Math.floor(Math.random() * AVATAR_BUBBLES.length)];
+            bubbleEl.hidden = false;
+            bubbleEl.classList.remove('is-open');
+            void bubbleEl.offsetWidth;
+            requestAnimationFrame(function() {
+              bubbleEl.classList.add('is-open');
+            });
+
+            bubbleTimer = setTimeout(function() {
+              bubbleEl.classList.remove('is-open');
+              bubbleHideTimer = setTimeout(function() {
+                bubbleEl.hidden = true;
+              }, 230);
+            }, 3200);
           });
         }
       })();

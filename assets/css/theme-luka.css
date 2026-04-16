@@ -190,13 +190,18 @@ body.theme-luka .site-tagline {
   min-height: 1.4em;
 }
 
+body.theme-luka .avatar-wrap {
+  margin: 0 auto 28px;
+  max-width: 100%;
+}
+
 body.theme-luka button.avatar-interactive {
   cursor: pointer;
   border: none;
   background: none;
   padding: 0;
   display: block;
-  margin: 0 auto 28px;
+  margin: 0 auto;
   border-radius: 50%;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -245,30 +250,57 @@ body.theme-luka button.avatar-interactive.is-wiggling img {
   body.theme-luka button.avatar-interactive.is-wiggling img {
     animation: none;
   }
+
+  body.theme-luka .avatar-bubble {
+    transition: none;
+  }
 }
 
-body.theme-luka .site-toast {
-  position: fixed;
-  bottom: 32px;
-  left: 50%;
-  z-index: 2000;
-  max-width: min(90vw, 360px);
-  padding: 11px 20px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #fff;
-  background: var(--luka-accent);
-  box-shadow: 0 8px 32px var(--luka-shadow);
+body.theme-luka .avatar-bubble {
+  margin: 14px auto 0;
+  max-width: 260px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: var(--luka-social-bg);
+  border: 1px solid var(--luka-border);
+  color: var(--luka-text);
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: left;
+  box-shadow: 0 6px 20px var(--luka-shadow);
+  position: relative;
   opacity: 0;
-  transform: translate(-50%, 16px);
+  transform: translateY(6px) scale(0.98);
+  transition: opacity 0.22s ease, transform 0.22s ease;
   pointer-events: none;
-  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-body.theme-luka .site-toast.is-visible {
+body.theme-luka .avatar-bubble.is-open {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translateY(0) scale(1);
+}
+
+body.theme-luka .avatar-bubble::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -8px;
+  border-width: 0 8px 8px 8px;
+  border-style: solid;
+  border-color: transparent transparent var(--luka-border) transparent;
+}
+
+body.theme-luka .avatar-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -7px;
+  margin-bottom: -1px;
+  border-width: 0 7px 7px 7px;
+  border-style: solid;
+  border-color: transparent transparent var(--luka-social-bg) transparent;
 }
 
 body.theme-luka .social-icons {
@@ -459,6 +491,22 @@ body.theme-luka .project-card > p:last-child {
   margin-bottom: 0;
 }
 
+body.theme-luka .project-card .project-detail {
+  margin: 0 0 0 0;
+  padding-left: 1.2em;
+  list-style: disc;
+  color: var(--luka-secondary);
+  font-size: 14px;
+}
+
+body.theme-luka .project-card .project-detail li {
+  margin-bottom: 6px;
+}
+
+body.theme-luka .project-card .project-detail li:last-child {
+  margin-bottom: 0;
+}
+
 body.theme-luka .timeline-item.project-card::after {
   top: 12px;
 }
@@ -629,6 +677,10 @@ body.theme-luka strong {
   body.theme-luka .award-text,
   body.theme-luka .pub-content .author,
   body.theme-luka .pub-content .periodical {
+    font-size: 13px;
+  }
+
+  body.theme-luka .project-card .project-detail {
     font-size: 13px;
   }
 }
