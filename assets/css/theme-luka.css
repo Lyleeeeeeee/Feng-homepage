@@ -244,6 +244,10 @@ body.theme-luka .visitor-card-body {
   line-height: 1.6;
 }
 
+body.theme-luka #clustrmaps-container {
+  min-height: 180px;
+}
+
 body.theme-luka .content {
   flex: 1;
   min-width: 0;
