@@ -262,22 +262,51 @@ body.theme-luka button.avatar-interactive.is-wiggling img {
   }
 }
 
+/* Speech bubble under the avatar (tail points up at the photo). */
 body.theme-luka .avatar-message {
-  margin: 12px auto 0;
+  position: relative;
+  margin: 16px auto 0;
   max-width: 280px;
-  padding: 10px 14px;
-  border-radius: 10px;
+  padding: 12px 16px;
+  border-radius: 16px;
   background: var(--luka-social-bg);
   border: 1px solid var(--luka-border);
   color: var(--luka-text);
   font-size: 13px;
-  line-height: 1.45;
+  font-weight: 500;
+  line-height: 1.5;
   text-align: center;
-  box-shadow: 0 4px 14px var(--luka-shadow);
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.04),
+    0 8px 24px var(--luka-shadow);
   opacity: 0;
-  transform: translateY(6px);
+  transform: translateY(8px);
   transition: opacity 0.22s ease, transform 0.22s ease;
   pointer-events: none;
+}
+
+body.theme-luka .avatar-message::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  margin-bottom: 1px;
+  transform: translateX(-50%);
+  border-width: 0 11px 11px 11px;
+  border-style: solid;
+  border-color: transparent transparent var(--luka-border) transparent;
+}
+
+body.theme-luka .avatar-message::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  margin-bottom: -1px;
+  transform: translateX(-50%);
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent var(--luka-social-bg) transparent;
 }
 
 body.theme-luka .avatar-message.is-visible {
