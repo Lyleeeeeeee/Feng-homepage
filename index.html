@@ -53,9 +53,9 @@
 
         <div class="visitor-card">
           <div class="visitor-card-title">Visitor Map</div>
-          <div class="visitor-card-body clustrmaps-root">
-            <!-- Official snippet from ClustrMaps (Javascript based). Must stay in &lt;body&gt;, not in &lt;head&gt;. -->
-            <script type="text/javascript" id="clustrmaps" src="https://cdn.clustrmaps.com/map_v2.js?cl=ffffff&amp;w=a&amp;t=n&amp;d=HVWYF2PFgGFRHKYzV_s0j4i6jvtqi_41aWYsytB0HE8"></script>
+          <div class="visitor-card-body">
+            <!-- ClustrMaps: injected by assets/js below — only one #clustrmaps may exist (widget script requirement). -->
+            <div id="clustrmaps-mount" class="clustrmaps-root"></div>
           </div>
         </div>
       </div>
@@ -104,7 +104,8 @@
               <div class="experience-content">
                 <p class="exp-title"><strong>University of North Carolina at Chapel Hill</strong></p>
                 <p class="exp-detail">B.S. in Statistics and Analytics & Economics (double majors); Cognitive Science (minor)</p>
-                <p class="exp-detail">Undergraduate thesis — <a href="assets/honors_thesis.pdf" target="_blank" rel="noopener">Highest Honors</a> · GPA: 3.99 / 4.00</p>
+                <p class="exp-detail">GPA: 3.99 / 4.00</p>
+                <p class="exp-detail">Undergraduate thesis — <a href="https://cdr.lib.unc.edu/concern/honors_theses/3r075827h" target="_blank" rel="noopener">Highest Honors</a></p>
                 <p class="exp-period">Aug 2021 - May 2025</p>
               </div>
             </div>
@@ -179,7 +180,7 @@
                     <div class="author"><strong>Feng Lin</strong>, Arran Zeyu Wang, Md Dilshadur Rahman, Danielle Albers Szafir, Ghulam Jilani Quadri</div>
                     <div class="periodical"><em><strong>BELIV Workshop</strong></em>, IEEE VIS (2024)</div>
                     <div class="links">
-                      <a href="https://ieeexplore.ieee.org/abstract/document/10756059" target="_blank" rel="noopener">arXiv</a>
+                      <a href="https://ieeexplore.ieee.org/abstract/document/10756059" target="_blank" rel="noopener">IEEE VIS</a>
                     </div>
                   </div>
                 </div>
@@ -199,7 +200,7 @@
             </div>
             <div class="award-item">
               <span class="award-icon">📜</span>
-              <div class="award-text"><strong>Dean's List</strong>, UNC Chapel Hill — all eight semesters (four years)</div>
+              <div class="award-text"><strong>Dean's List</strong>, UNC Chapel Hill — all eight semesters</div>
             </div>
           </div>
         </div>
@@ -221,11 +222,47 @@
       const themeToggle = document.getElementById('themeToggle');
       const icon = themeToggle.querySelector('i');
 
+      var CLUSTRMAPS_SITE = 'HVWYF2PFgGFRHKYzV_s0j4i6jvtqi_41aWYsytB0HE8';
+      var LAND = 'c2714f';
+
+      function clustrmapsScriptUrl(isDark) {
+        var co = isDark ? '1e2a35' : 'b8d9ec';
+        var ct = isDark ? 'c9c4bc' : '5c5346';
+        var cmo = isDark ? 'f0a878' : 'a85a3a';
+        var cmn = isDark ? 'ffe8d4' : 'f2c9a8';
+        return 'https://cdn.clustrmaps.com/map_v2.js?cl=' + LAND + '&co=' + co + '&cmo=' + cmo + '&cmn=' + cmn + '&ct=' + ct + '&w=a&t=n&d=' + CLUSTRMAPS_SITE;
+      }
+
+      function destroyClustrmaps() {
+        var w = document.getElementById('clustrmaps-widget-v2');
+        if (w && w.parentNode) {
+          w.parentNode.removeChild(w);
+        }
+        var s = document.getElementById('clustrmaps');
+        if (s && s.parentNode) {
+          s.parentNode.removeChild(s);
+        }
+      }
+
+      function mountClustrmaps(isDark) {
+        destroyClustrmaps();
+        var mount = document.getElementById('clustrmaps-mount');
+        if (!mount) {
+          return;
+        }
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.id = 'clustrmaps';
+        script.src = clustrmapsScriptUrl(!!isDark);
+        mount.appendChild(script);
+      }
+
       function setTheme(isDark) {
         document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
         icon.classList.toggle('fa-sun', isDark);
         icon.classList.toggle('fa-moon', !isDark);
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        mountClustrmaps(isDark);
       }
 
       const savedTheme = localStorage.getItem('theme');
