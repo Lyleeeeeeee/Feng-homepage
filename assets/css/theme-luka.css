@@ -247,51 +247,6 @@ body.theme-luka button.avatar-interactive.is-wiggling img {
   }
 }
 
-body.theme-luka .playful-card {
-  margin-top: 18px;
-  padding: 14px 16px;
-  border: 1px dashed var(--luka-border);
-  border-radius: 12px;
-  background: rgba(194, 113, 79, 0.04);
-}
-
-body.theme-luka .thought-shuffle-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--luka-border);
-  background: var(--luka-social-bg);
-  color: var(--luka-text);
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  font-family: inherit;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
-}
-
-body.theme-luka .thought-shuffle-btn:hover {
-  background: var(--luka-accent);
-  border-color: var(--luka-accent);
-  color: #fff;
-}
-
-body.theme-luka .thought-shuffle-btn:active {
-  transform: scale(0.98);
-}
-
-body.theme-luka .thought-bubble {
-  margin: 12px 0 0;
-  font-size: 14px;
-  line-height: 1.65;
-  color: var(--luka-secondary);
-}
-
-body.theme-luka .thought-bubble:not([hidden]) {
-  display: block;
-}
-
 body.theme-luka .site-toast {
   position: fixed;
   bottom: 32px;

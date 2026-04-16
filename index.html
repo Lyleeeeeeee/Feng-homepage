@@ -78,13 +78,6 @@
             I have worked on topics including probability calibration in unbalanced classification, 
             multimodal recommendation systems, and treatment effect estimation under measurement error.
           </p>
-          <div class="playful-card">
-            <button type="button" class="thought-shuffle-btn" id="thoughtShuffle">
-              <i class="fa-solid fa-shuffle" aria-hidden="true"></i>
-              <span>Random research tangent</span>
-            </button>
-            <p class="thought-bubble" id="thoughtBubble" hidden></p>
-          </div>
         </div>
       </div>
 
@@ -159,12 +152,12 @@
           <div class="card timeline-item project-card">
             <p><strong>Saliency Maps for Semantic Segmentation in Dashcam Images</strong></p>
             <p class="exp-period">Aug – Dec 2024</p>
-            <p>Combined saliency from CNN, GAN, and Transformer models in a U-Net pipeline; +13.1% car-class pixel accuracy and −25% pedestrian detection variance.</p>
+            <p>Combined saliency maps from CNN, GAN, and Transformer models in a U-Net pipeline; +13.1% car-class pixel accuracy and −25% pedestrian detection variance.</p>
           </div>
           <div class="card timeline-item project-card">
             <p><strong>American Bar Association Legal Service Supply Shortage</strong></p>
             <p class="exp-period">Mar 2024</p>
-            <p>Two-stage risk ranking with LSTM, SVM, and KNN (82% recall on underserved regions); causality-informed feature improving downstream prioritization by 27%.</p>
+            <p>Two-stage risk ranking with LSTM, SVM, and KNN (82% recall on underserved regions); causality-informed feature engineering improving downstream prioritization by 27%.</p>
           </div>
         </div>
       </div>
@@ -291,31 +284,16 @@
       });
 
       var TAGLINES = [
-        'Calibrating models — and curiosity.',
-        'UNC → CMU; still learning something new every week.',
-        'When in doubt, check the baselines.',
-        'Exploring imbalance: in data, metrics, and pour-over strength.'
-      ];
-      var TANGENTS = [
-        'If two reviewers disagree, the paper might be fine — the metrics might not be.',
-        'Class imbalance is as much an evaluation design problem as a modeling one.',
-        'Multimodal retrieval: align the embeddings, then align your sleep schedule.',
-        'Calibration after resampling? Your posteriors may need a second opinion.',
-        'A good ablation is worth more than a flashy new layer name.'
+        'When in doubt, rerun the baseline.',
+        'UNC → CMU: new office, same git blame.',
+        'Calibrating probabilities — and occasionally my sleep schedule.',
+        '概率校准了，作息还在梯度震荡。',
       ];
 
       (function initPlayful() {
         var tagEl = document.getElementById('siteTagline');
         if (tagEl && TAGLINES.length) {
           tagEl.textContent = TAGLINES[Math.floor(Math.random() * TAGLINES.length)];
-        }
-        var shuffleBtn = document.getElementById('thoughtShuffle');
-        var bubble = document.getElementById('thoughtBubble');
-        if (shuffleBtn && bubble) {
-          shuffleBtn.addEventListener('click', function() {
-            bubble.textContent = TANGENTS[Math.floor(Math.random() * TANGENTS.length)];
-            bubble.hidden = false;
-          });
         }
         var avatarBtn = document.getElementById('avatarHi');
         var toastEl = document.getElementById('siteToast');
