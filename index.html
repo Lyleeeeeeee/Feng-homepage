@@ -40,7 +40,6 @@
           <button type="button" class="image avatar avatar-interactive" id="avatarHi" aria-label="Say hello">
             <img src="assets/img/Feng.JPEG" alt="Feng Lin">
           </button>
-          <div class="avatar-message" id="avatarMessage" role="status" aria-live="polite" hidden></div>
         </div>
 
         <h1 class="site-name">Feng Lin</h1>
@@ -242,6 +241,9 @@
     </footer>
   </div>
 
+  <!-- Fixed tooltip: must stay outside .sidebar so overflow doesn’t clip it. -->
+  <div class="avatar-message" id="avatarMessage" role="status" aria-live="polite" hidden></div>
+
   <script src="assets/js/scale.fix.js"></script>
   <script>
     (function() {
@@ -302,17 +304,17 @@
       });
 
       var AVATAR_BUBBLES = [
-        'Thanks for stopping by!',
-        'Hi — scroll down for the serious stuff.',
-        'Appreciate the click. The baselines appreciate it too.',
-        'When in doubt, rerun the baseline.',
-        'UNC → CMU: new office, same git blame.',
-        'Calibrating probabilities — and occasionally my sleep schedule.',
-        '概率校准了，作息还在梯度震荡。',
-        '睡觉是另一个非"秃"问题。',
-        'Gradient descent on life; occasional NaN in sleep.',
-        '谢谢来访。',
-        'My life will be Gradient Ascent, not Gradient Descent.'
+        'Thanks for stopping by!😄',
+        'Hi — scroll down for the serious stuff.😌',
+        'Appreciate the click. The baselines appreciate it too.😉',
+        'When in doubt, rerun the baseline.😅',
+        'UNC → CMU: new office, same git blame.😎',
+        'Calibrating probabilities — and occasionally my sleep schedule.😴',
+        '概率校准了，作息还在梯度震荡。😵',
+        '睡觉是另一个非"秃"问题。😵‍💫',
+        'Gradient descent on life; occasional NaN in sleep.😴',
+        '谢谢来访。😊',
+        'My life will be Gradient Ascent, not Gradient Descent.😎'
       ];
 
       (function initPlayful() {
@@ -324,8 +326,18 @@
           function placeAvatarMessage() {
             var r = avatarBtn.getBoundingClientRect();
             var gap = 10;
-            msgEl.style.left = Math.round(r.left + r.width / 2) + 'px';
-            msgEl.style.top = Math.round(r.bottom + gap) + 'px';
+            /* Bubble sits to the right of the avatar, slightly below its top (upper-right area). */
+            var left = Math.round(r.right + gap);
+            var top = Math.round(r.top + r.height * 0.08);
+            msgEl.style.left = left + 'px';
+            msgEl.style.top = top + 'px';
+            requestAnimationFrame(function() {
+              var w = msgEl.offsetWidth;
+              var vw = window.innerWidth;
+              if (left + w > vw - 8) {
+                msgEl.style.left = Math.max(8, vw - w - 8) + 'px';
+              }
+            });
           }
 
           function syncMessagePosition() {
@@ -348,8 +360,8 @@
             clearTimeout(msgTimer);
             clearTimeout(msgHideTimer);
             msgEl.textContent = AVATAR_BUBBLES[Math.floor(Math.random() * AVATAR_BUBBLES.length)];
-            placeAvatarMessage();
             msgEl.hidden = false;
+            placeAvatarMessage();
             msgEl.classList.remove('is-visible');
             void msgEl.offsetWidth;
             requestAnimationFrame(function() {

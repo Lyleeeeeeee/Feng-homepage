@@ -253,10 +253,10 @@ body.theme-luka button.avatar-interactive.is-wiggling img {
   }
 }
 
-/* Fixed below avatar so the sidebar doesn’t grow and show a scrollbar. */
+/* Fixed to viewport; DOM node lives under <body> (not inside overflow sidebar). */
 body.theme-luka .avatar-message {
   position: fixed;
-  z-index: 300;
+  z-index: 9999;
   left: 0;
   top: 0;
   margin: 0;
@@ -269,43 +269,41 @@ body.theme-luka .avatar-message {
   font-size: 13px;
   font-weight: 500;
   line-height: 1.5;
-  text-align: center;
+  text-align: left;
   box-shadow:
     0 2px 0 rgba(0, 0, 0, 0.04),
     0 8px 24px var(--luka-shadow);
   opacity: 0;
-  transform: translate(-50%, 8px);
+  transform: translate(12px, 0);
   transition: opacity 0.22s ease, transform 0.22s ease;
   pointer-events: none;
 }
 
+/* Tail on the left edge, pointing toward the avatar. */
 body.theme-luka .avatar-message::before {
   content: "";
   position: absolute;
-  left: 50%;
-  bottom: 100%;
-  margin-bottom: 1px;
-  transform: translateX(-50%);
-  border-width: 0 11px 11px 11px;
+  right: 100%;
+  top: 22px;
+  border-width: 9px 9px 9px 0;
   border-style: solid;
-  border-color: transparent transparent var(--luka-border) transparent;
+  border-color: transparent var(--luka-border) transparent transparent;
 }
 
 body.theme-luka .avatar-message::after {
   content: "";
   position: absolute;
-  left: 50%;
-  bottom: 100%;
-  margin-bottom: -1px;
-  transform: translateX(-50%);
-  border-width: 0 10px 10px 10px;
+  right: 100%;
+  top: 22px;
+  margin-right: -1px;
+  border-width: 8px 8px 8px 0;
   border-style: solid;
-  border-color: transparent transparent var(--luka-social-bg) transparent;
+  border-color: transparent var(--luka-social-bg) transparent transparent;
 }
 
 body.theme-luka .avatar-message.is-visible {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translate(0, 0);
 }
 
 body.theme-luka .social-icons {
